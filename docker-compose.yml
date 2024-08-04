@@ -1,14 +1,16 @@
-version: "3.9" 
+version: "3.9"
 services:
-  web:
+  worker:
     build: .
-    ports:
-      - "8000:5000"
     volumes:
       - .:/code
       - logvolume01:/var/log
     links:
       - redis
+    ports:
+      - "3000:3000"  
+    environment:
+      SESSION_ID: ${SESSION_ID}
   redis:
     image: redis
 volumes:
